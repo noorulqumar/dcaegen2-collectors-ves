@@ -13,8 +13,7 @@ jobs:
     # Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        submodules: true
+
 
     # Set up Java
     - name: Set up JDK 11
@@ -22,3 +21,11 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '11'
+
+    - name: ttt
+      run: |
+        ls
+        mvn clean package
+        cp ./src/docker/Dockerfile ./target/VESCollector-1.12.3-SNAPSHOT/
+        cd ./target/VESCollector-1.12.3-SNAPSHOT/
+        docker build -t ios-mcn-smo/ves-collector:1.12.3 .
